@@ -1,0 +1,20 @@
+on:
+  push:
+    branches: [main]
+  repository_dispatch:
+    types: [lazycat]
+  workflow_dispatch:
+    inputs:
+      operation:
+        type: choice
+        options: [auto, build, publish, release]
+        default: auto
+
+jobs:
+  lazycat:
+    uses: ca-x/lazycat-github-action/.github/workflows/lazycat.yml@v1
+    with:
+      operation: ${{ inputs.operation || 'auto' }}
+    permissions:
+      contents: read
+      packages: read

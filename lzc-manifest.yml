@@ -1,0 +1,41 @@
+name: community.lazycat.app.yily
+version: 1.0.0-beta.2
+type: app
+
+# upstream: yannick2009/yily  MIT
+# 懒猫打包：镜像模式，仅发喵喵商店
+icon: ./icon.png
+
+source:
+  upstream: https://github.com/yannick2009/yily
+  licence: MIT
+
+architecture: linux/amd64,linux/arm64
+
+services:
+  yily:
+    image: ghcr.1ms.run/yannick2009/yily:1.0.0-beta.2
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - wget -q -O /dev/null http://127.0.0.1:52015/ || exit 1
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 30s
+    ports:
+      - "52015:52015"
+    environment:
+      - YILY_MASTER_KEY={{ stable_secret "yily_master_key" }}
+      - YILY_SETUP_TOKEN={{ stable_secret "yily_setup_token" }}
+    volumes:
+      - yily-data:/data
+
+volumes:
+  yily-data:
+    type: persist
+
+deployment:
+  replicas: 1
+
+public_path: /
