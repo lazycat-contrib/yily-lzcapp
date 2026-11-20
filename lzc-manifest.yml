@@ -1,19 +1,15 @@
-name: community.lazycat.app.yily
-version: 1.0.0-beta.2
-type: app
-
-# upstream: yannick2009/yily  MIT
-# 懒猫打包：镜像模式，仅发喵喵商店
-icon: ./icon.png
-
-source:
-  upstream: https://github.com/yannick2009/yily
-  licence: MIT
-
-architecture: linux/amd64,linux/arm64
+application:
+  subdomain: yily
+  multi_instance: false
+  upstreams:
+    - location: /
+      backend: http://yily:52015
+  public_path:
+    - /
 
 services:
   yily:
+    # 镜像模式：Action 只读校验后改写成加速地址（ghcr.1ms.run）
     image: ghcr.1ms.run/yannick2009/yily:1.0.0-beta.2
     healthcheck:
       test:
@@ -37,5 +33,3 @@ volumes:
 
 deployment:
   replicas: 1
-
-public_path: /
