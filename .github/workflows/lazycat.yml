@@ -8,10 +8,11 @@ on:
   workflow_dispatch:
 
 jobs:
-  lazycat:
+  build:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+      attestations: write
     steps:
       - uses: actions/checkout@v4
       - uses: ca-x/lazycat-github-action@v1
@@ -21,3 +22,8 @@ jobs:
           ghcr-mirror: ghcr.1ms.run
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Upload LPK artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: lpk-package
+          path: dist/yily.lpk
