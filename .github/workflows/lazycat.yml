@@ -6,21 +6,18 @@ on:
   schedule:
     - cron: "0 */6 * * *"
   workflow_dispatch:
-    inputs:
-      operation:
-        description: auto, check, build, publish-official, publish-private
-        required: false
-        default: auto
-      version:
-        description: Manual SemVer; auto builds when supplied
-        required: false
-        default: ""
 
 jobs:
   lazycat:
-    uses: ca-x/lazycat-github-action/.github/workflows/lazycat.yml@v1
-    with:
-      config: .github/lazycat-action.yml
-      operation: ${{ inputs.operation || 'auto' }}
-      version: ${{ inputs.version || '' }}
-    secrets: inherit
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ca-x/lazycat-github-action@v1
+        id: lazycat
+        with:
+          operation: auto
+          GHCR_MIRROR: ghcr.1ms.run
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
