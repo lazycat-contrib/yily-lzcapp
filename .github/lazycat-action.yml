@@ -1,0 +1,19 @@
+version_source:
+  type: image
+  image: yily
+
+images:
+  - id: yily
+    target: yily
+    service: yily
+    source: ghcr.io/yannick2009/yily
+    channel: stable
+    sort: semver
+    tag_regex: '^\d+\.\d+\.\d+.*$'
+    delivery:
+      mode: mirror
+      require_digest_match: true
+
+stores:
+  private:
+    - community.lazycat.app.yily
