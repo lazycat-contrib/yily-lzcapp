@@ -1,26 +1,26 @@
+name: LazyCat LPK Automation
+
 on:
   push:
     branches: [main]
-  repository_dispatch:
-    types: [lazycat]
+  schedule:
+    - cron: "0 */6 * * *"
   workflow_dispatch:
     inputs:
       operation:
-        type: choice
-        options: [auto, build, publish, release]
+        description: auto, check, build, publish-official, publish-private
+        required: false
         default: auto
+      version:
+        description: Manual SemVer; auto builds when supplied
+        required: false
+        default: ""
 
 jobs:
   lazycat:
-    runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      packages: read
-    steps:
-      - uses: actions/checkout@v4
-      - uses: ca-x/lazycat-github-action@v1
-        with:
-          operation: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.operation || 'auto' }}
-        env:
-          GHCR_MIRROR: ghcr.1ms.run
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    uses: ca-x/lazycat-github-action/.github/workflows/lazycat.yml@v1
+    with:
+      config: .github/lazycat-action.yml
+      operation: ${{ inputs.operation || 'auto' }}
+      version: ${{ inputs.version || '' }}
+    secrets: inherit
