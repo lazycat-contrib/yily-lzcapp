@@ -1,18 +1,17 @@
-# upstream: AldenClark/pushgo-gateway  MIT
-# 懒猫打包：镜像模式，仅发喵喵商店
-icon: ./icon.png
-
-name: yily
-summary: 轻量自托管密钥管理
-description: |
-  Yily 是一个轻量自托管的秘密管理应用，服务端 Go（Echo + SQLite），前端 SolidJS + Tailwind。
-  全站只有一个 Super Admin 账号，没有第三方 IdP、OAuth 或外部 SMTP。
-
-  镜像跟随上游 ghcr.io/yannick2009/yily 的版本 tag 自动更新（镜像模式）。
-
+package: community.lazycat.app.yily
 version: 1.0.0-beta.2
-release_notes: "Yily 1.0.0-beta.2：轻量自托管密钥管理应用初版"
-
-tags:
-  - Secret管理
-  - 自托管
+name: yily
+description: "Lightweight self-hosted secrets manager — store API keys, passwords, and tokens without deploying Vault or Infisical. MIT."
+homepage: https://github.com/yannick2009/yily
+author: yannick2009
+license: MIT
+locales:
+  zh:
+    name: "yily"
+    description: "轻量自托管密钥管理：自托管存 API key、密码、token，无需部署 Vault 或 Infisical 全套。MIT。"
+  zh_CN:
+    name: "yily"
+    description: "轻量自托管密钥管理：自托管存 API key、密码、token，无需部署 Vault 或 Infisical 全套。MIT。"
+  en:
+    name: "yily"
+    description: "Lightweight self-hosted secrets manager — store API keys, passwords and tokens without the overhead of Vault or Infisical. MIT."

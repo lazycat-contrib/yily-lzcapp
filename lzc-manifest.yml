@@ -9,7 +9,6 @@ application:
 
 services:
   yily:
-    # 镜像模式：Action 只读校验后改写成加速地址（ghcr.1ms.run）
     image: ghcr.1ms.run/yannick2009/yily:1.0.0-beta.2
     healthcheck:
       test:
@@ -19,17 +18,12 @@ services:
       timeout: 10s
       retries: 5
       start_period: 30s
-    ports:
-      - "52015:52015"
     environment:
       - YILY_MASTER_KEY={{ stable_secret "yily_master_key" }}
       - YILY_SETUP_TOKEN={{ stable_secret "yily_setup_token" }}
-    volumes:
-      - yily-data:/data
+    binds:
+      - /lzcapp/var/yily:/data
 
-volumes:
-  yily-data:
-    type: persist
-
-deployment:
-  replicas: 1
+usage: |
+  yily 是一个轻量自托管的秘密管理应用，全站只有一个 Super Admin 账号。
+  首次安装后用 YILY_SETUP_TOKEN 引导创建管理员，然后可关闭注册。
