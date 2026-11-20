@@ -22,7 +22,7 @@ images:
   - id: yily
     target: service
     service: yily
-    source: yannick2009/yily
+    source: ghcr.io/yannick2009/yily
     channel: stable
     sort: semver
     tag_regex: '^\d+\.\d+\.\d+.*$'

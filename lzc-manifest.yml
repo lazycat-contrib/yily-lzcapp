@@ -9,7 +9,7 @@ application:
 
 services:
   yily:
-    image: ghcr.1ms.run/yannick2009/yily:1.0.0-beta.2
+    image: docker.1ms.run/ghcr.io/yannick2009/yily:1.0.0-beta.2
     healthcheck:
       test:
         - CMD-SHELL
