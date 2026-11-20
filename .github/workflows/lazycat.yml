@@ -12,9 +12,15 @@ on:
 
 jobs:
   lazycat:
-    uses: ca-x/lazycat-github-action/.github/workflows/lazycat.yml@v1
-    with:
-      operation: ${{ inputs.operation || 'auto' }}
+    runs-on: ubuntu-latest
     permissions:
       contents: read
       packages: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ca-x/lazycat-github-action@v1
+        with:
+          operation: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.operation || 'auto' }}
+        env:
+          GHCR_MIRROR: ghcr.1ms.run
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
