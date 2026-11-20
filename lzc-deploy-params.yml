@@ -1,6 +1,12 @@
 params:
-  - key: allow_signups
+  - id: allow_signups
     type: bool
-    label: 允许注册
-    description: 是否允许新用户注册（关闭后只有首位管理员能建号）
-    default: false
+    name: "允许注册"
+    description: "是否允许新用户注册（关闭后只有首位管理员能建号）"
+    default_value: false
+
+locales:
+  zh:
+    allow_signups:
+      name: "允许注册"
+      description: "是否允许新用户注册（关闭后只有首位管理员能建号）"
