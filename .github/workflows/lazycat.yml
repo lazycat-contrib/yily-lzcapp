@@ -18,6 +18,6 @@ jobs:
         id: lazycat
         with:
           operation: auto
-          GHCR_MIRROR: ghcr.1ms.run
+          ghcr-mirror: ghcr.1ms.run
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
