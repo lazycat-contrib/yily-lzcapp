@@ -17,6 +17,7 @@ jobs:
     with:
       operation: auto
       config: .github/lazycat-action.yml
+      versioned-release-asset: true
     secrets:
       GH_REPO_TOKEN: ${{ secrets.GH_REPO_TOKEN }}
       LZC_API_HOST: ${{ secrets.LZC_API_HOST }}
